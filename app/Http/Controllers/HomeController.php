@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Partido;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+    //     $userRole = User::where('user.id', $user_id)
+    // ->leftJoin('role', 'user.role', '=', 'role.role_id')
+    // ->select(
+    //     'user.id',
+    //     'role.role_name'
+// )
+        $partidos = Partido::all();
+        // $partidoC = Partido::find(1);
+        return view('home', ['partidos' => $partidos]);
     }
 }

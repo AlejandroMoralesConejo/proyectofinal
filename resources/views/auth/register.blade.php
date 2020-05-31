@@ -12,10 +12,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="nombreJ" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="nombreJ" type="text" class="form-control @error('nombreJ') is-invalid @enderror" name="nombreJ" value="{{ old('nombreJ') }}" required autocomplete="nombreJ" autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -63,10 +63,10 @@
 
                         {{-- Posicion --}}
                         <div class="form-group row">
-                            <label for="position" class="col-md-4 col-form-label text-md-right">{{ __('Posición') }}</label>
+                            <label for="posicion" class="col-md-4 col-form-label text-md-right">{{ __('Posición') }}</label>
 
                             <div class="col-md-6">
-                                <select id="position" class="form-control" name="posicion" required>
+                                <select id="posicion" class="form-control" name="posicion" required>
                                     <option selected value="">Elige una opción</option>
                                     <option value="derecha">Derecha</option>
                                     <option value="reves">Revés</option>
@@ -78,10 +78,10 @@
 
                         {{-- fecha de nacimiento --}}
                         <div class="form-group row">
-                            <label for="fnacimiento" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de nacimiento') }}</label>
+                            <label for="fnac" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de nacimiento') }}</label>
                             
                             <div class="col-md-6">
-                                <input id="fnacimiento" class="form-control" type="date" name="fnac" />
+                                <input id="fnac" class="form-control" type="date" name="fnac" />
                             </div>
                         </div>
 

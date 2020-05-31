@@ -10,13 +10,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'idJug';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nombreJ', 'email', 'password', 'fec_nacimiento', 'posicion', 'foto', 'perfil', 
     ];
 
     /**
@@ -36,4 +38,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function partidos()
+    {
+        return $this->belongsToMany('App\Partido', 'partido_jugador', 'idJug', 'idPartido');
+    }
 }
