@@ -15,7 +15,7 @@ class Partido extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre', 'fecha', 'hora', 
+        'nombre', 'fecha', 'hora', 'idPista',
     ];
 
     public function users()

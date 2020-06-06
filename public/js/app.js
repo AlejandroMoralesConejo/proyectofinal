@@ -1924,9 +1924,171 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      idPista: "",
+      nombre: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      fecha: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      hora: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      limite: 0,
+
+      /*Esta variable contrarolará cuando es una nueva tarea o una modificación, si es 0 significará que no hemos seleccionado ninguna tarea, pero si es diferente de 0 entonces tendrá el id de la tarea y no mostrará el boton guardar sino el modificar*/
+      nombreP: "",
+      arrayMatches: [],
+      //Este array contendrá las tareas de nuestra bd
+      pistas: []
+    };
+  },
+  methods: {
+    getMatches: function getMatches() {
+      // me.getPistas();
+      var me = this;
+      var url = '/admin/partidos'; //Ruta que hemos creado para que nos devuelva todas las tareas
+
+      axios.get(url).then(function (response) {
+        //creamos un array y guardamos el contenido que nos devuelve el response
+        me.arrayMatches = response.data;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    getPistas: function getPistas() {
+      var me = this;
+      var url = '/admin/pistas'; //Ruta que hemos creado para que nos devuelva todas las tareas
+
+      axios.get(url).then(function (response) {
+        //creamos un array y guardamos el contenido que nos devuelve el response
+        me.pistas = response.data;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    saveMatch: function saveMatch() {
+      var me = this;
+      var url = '/admin/add'; //Ruta que hemos creado para enviar una tarea y guardarla
+
+      axios.post(url, {
+        //estas variables son las que enviaremos para que crear la tarea
+        'nombre': this.nombre,
+        'fecha': this.fecha,
+        'hora': this.hora,
+        'idPista': this.idPista
+      }).then(function (response) {
+        me.getMatches(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateMatch: function updateMatch() {
+      /*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
+      tarea que queremos modificar*/
+      var me = this;
+      axios.put('/admin/update', {
+        'idPartido': this.update,
+        'nombre': this.nombre,
+        'fecha': this.fecha,
+        'hora': this.hora,
+        'idPista': this.idPista
+      }).then(function (response) {
+        me.getMatches(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadFieldsUpdate: function loadFieldsUpdate(data) {
+      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
+      this.update = data.idPartido;
+      var me = this;
+      var url = '/admin/find/' + this.update;
+      axios.get(url).then(function (response) {
+        me.nombre = response.data.nombre;
+        me.fecha = response.data.fecha;
+        me.hora = response.data.hora;
+        me.idPista = response.data.nombreP;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    deleteMatch: function deleteMatch(data) {
+      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+      var me = this;
+      var task_id = data.idPartido; // if (confirm('¿Seguro que deseas borrar este partido?')) {
+
+      axios["delete"]('/admin/delete/' + task_id).then(function (response) {
+        me.getMatches();
+      })["catch"](function (error) {
+        console.log(error);
+      }); // }
+    },
+    clearFields: function clearFields() {
+      /*Limpia los campos e inicializa la variable update a 0*/
+      this.nombre = "";
+      this.fecha = "";
+      this.hora = "";
+      this.idPista = "";
+      this.update = 0;
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getMatches();
+    this.getPistas();
   }
 });
 
@@ -37475,28 +37637,234 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c("table", { staticClass: "table table-striped table-light" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.arrayMatches, function(match) {
+          return _c("tr", { key: match.idPartido }, [
+            _c("td", { domProps: { textContent: _vm._s(match.nombre) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(match.fecha) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(match.hora) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(match.limite) } }),
+            _vm._v(" "),
+            _c("td", { domProps: { textContent: _vm._s(match.nombreP) } }),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _c(
+                  "b-button",
+                  {
+                    directives: [
+                      {
+                        name: "b-modal",
+                        rawName: "v-b-modal.modal-1",
+                        modifiers: { "modal-1": true }
+                      }
+                    ],
+                    on: {
+                      click: function($event) {
+                        return _vm.loadFieldsUpdate(match)
+                      }
+                    }
+                  },
+                  [_vm._v("Modificar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-modal",
+                  {
+                    attrs: {
+                      id: "modal-1",
+                      title: "Editar partido",
+                      "ok-title": "Modificar",
+                      "ok-variant": "success",
+                      "cancel-title": "Cancelar"
+                    },
+                    on: {
+                      ok: function($event) {
+                        return _vm.updateMatch()
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Nombre")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.nombre,
+                            expression: "nombre"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.nombre },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.nombre = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", [_vm._v("Fecha")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fecha,
+                            expression: "fecha"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date" },
+                        domProps: { value: _vm.fecha },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.fecha = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", [_vm._v("Hora")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.hora,
+                            expression: "hora"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "time" },
+                        domProps: { value: _vm.hora },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.hora = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.idPista,
+                              expression: "idPista"
+                            }
+                          ],
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.idPista = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _vm.update == 0
+                            ? _c(
+                                "option",
+                                { attrs: { disabled: "", value: "" } },
+                                [_vm._v("Seleccione una pista")]
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    directives: [
+                      {
+                        name: "b-modal",
+                        rawName: "v-b-modal.modal-2",
+                        modifiers: { "modal-2": true }
+                      }
+                    ],
+                    attrs: { color: "error" }
+                  },
+                  [_vm._v("Borrar")]
+                ),
+                _vm._v(" "),
+                _c("b-modal", {
+                  attrs: {
+                    "ok-title": "Borrar",
+                    "ok-variant": "danger",
+                    "cancel-title": "Cancelar",
+                    id: "modal-2",
+                    title: "¿Estas seguro?"
+                  },
+                  on: {
+                    ok: function($event) {
+                      return _vm.deleteMatch(match)
+                    }
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hora")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Jugadores apuntados")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Pista")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")])
       ])
     ])
   }
@@ -49683,6 +50051,7 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.Jquery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49694,7 +50063,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]); // Vue.component('scroll-partidos', require('./components/ScrollPartidos.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
