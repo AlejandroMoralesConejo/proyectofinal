@@ -1,18 +1,8 @@
 @extends('layouts.app')
-<!-- css for this view, slide mainly -->
+<!-- css for this view, slide banner -->
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-<script type="text/javascript">
-    function PlaySound(soundobj) {
-        var thissound=document.getElementById(soundobj);
-        thissound.play();
-    }
-
-    function StopSound(soundobj) {
-        var thissound=document.getElementById(soundobj);
-        thissound.pause();
-        thissound.currentTime = 0;
-    }
-</script>
+<script src="{{ asset('js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/faq.js') }}"></script>
 @section('faq')
     <!-- banner slider -->
     <div class="banner"></div>
@@ -38,23 +28,44 @@
         </div>
     </div>
 
+    <!-- sounds -->
     <div class="container">
         <div class="row">
             <div class="col-md-3 offset-md-1">
-                <a onclick="document.getElementById('golpe').play()" class="btn btn-outline-primary btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Golpe</a>
+                <a onclick="document.getElementById('golpe').play()" class="btn btn-outline-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Golpe</a>
                 <audio id="golpe" src="{{ asset('sonidos/golpe.mp3') }}" type="audio/mpeg">
             </div>
 
             <div class="col-md-3 offset-md-1">
-                <a onclick="document.getElementById('pared').play()" class="btn btn-outline-primary btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Pared</a>
+                <a onclick="document.getElementById('pared').play()" class="btn btn-outline-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Pared</a>
                 <audio id="pared" src="{{ asset('sonidos/pared.mp3') }}" type="audio/mpeg">
             </div>
 
             <div class="col-md-3 offset-md-1">
-                <a onclick="document.getElementById('gente').play()" class="btn btn-outline-primary btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Ovación</a>
+                <a onclick="document.getElementById('gente').play()" class="btn btn-outline-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Ovación</a>
                 <audio id="gente" src="{{ asset('sonidos/gente.mp3') }}" type="audio/mpeg">
             </div>
         </div>
+
     </div>
+
+    <!-- graph with canvas -->
+    <div class="jumbotron jumbotron-fluid bg-light border mt-4">
+        <div class="container">
+            <h1 class="display-4">¡No paramos de crecer!</h1>
+            <p class="lead">Todos estos partidos se han jugado en 2020</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 my-3">
+                <canvas id="myChart" height="400" width="800"></canvas>
+            </div>
+        </div>
+    </div>
+    
 @endsection
+
+
 

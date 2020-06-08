@@ -10,12 +10,12 @@
     <title>{{ config('app.name', 'Padelemotion') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/crud.js') }}"></script>
     <script src="{{ asset('js/buscador.js') }}"></script>
     <!-- <script src="{{ asset('js/checkRegister.js') }}"></script> -->
-    
+
 
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 
@@ -30,8 +30,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/padel.css') }}" rel="stylesheet">
-    
-    
+
+
 
 
 
@@ -98,9 +98,9 @@
         <div class="container">
             <main class="py-4">
                 @yield('content')
-                
+
             </main>
-            
+
         </div>
         <footer class="navbar fixed-bottom bg-dark text-white py-2">
             <div class="container">
@@ -112,4 +112,40 @@
         </footer>
     </div>
 </body>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var valores1 = [8, 12, 15, 16, 23, 33, 45];
+    var valores2 = [13, 10, 18, 13, 30, 25, 35];
+
+    var label = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"];
+
+
+
+
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: label,
+            datasets: [{
+                label: 'Partidos amateurs',
+                data: valores1,
+                backgroundColor: '#ed3e72',
+                borderColor: 'white',
+                borderWidth: 1
+            },
+            {
+                label: 'Partidos profesionales',
+                data: valores2,
+                backgroundColor: '#3db4ba',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+</script>
 </html>

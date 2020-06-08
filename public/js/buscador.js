@@ -1,6 +1,4 @@
-
-
-$(document).ready(function(){
+$(document).ready(function() {
     $("#buscador").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#fila .card").filter(function() {
@@ -16,6 +14,3 @@ $(document).ready(function(){
     });
 
 });
-
-
-
