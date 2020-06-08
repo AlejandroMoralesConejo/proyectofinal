@@ -2,9 +2,9 @@
 
 @section('content')
 <div id="fila" class="row">
-    <div class="card w-100 hoverable my-5 bg-white">
+    <div class="card w-100 hoverable my-5 bg-light border">
         {{-- Head with date --}}
-        <div class="card-header bg-light">
+        <div class="card-header cardheader text-light">
             <div class="row">
                 <div class="h5 col-md-4">
                     <strong>{{ \Carbon\Carbon::parse($partido->fecha)->locale('es')->dayName }}, </strong>
@@ -14,7 +14,7 @@
                 <div class="h5 col-md-4 text-right"><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($partido->hora)->format('H:i') }}</div>
             </div>
         </div>
-        <div class="card-body" style="background-image: url('../img/vs.jpg'); background-size: cover;">
+        <div class="card-body bg-light">
             <div class="row">
 
                 {{-- Loop for players assignment --}}
@@ -28,7 +28,7 @@
                         @php
                             $x++;
                         @endphp
-                        @if ($x == 2 && $numJugadores > 2)
+                        @if ($x == 3 && $numJugadores > 2)
                             <div class="col-md-4 text-center">
                             @if ($logueadoPertenece == false)
                                 <form id="apuntar" action="{{ route('partido.add') }}" method="GET">

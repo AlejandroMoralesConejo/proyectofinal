@@ -85,4 +85,9 @@ class HomeController extends Controller
 
         return back()->with('foto', 'Se ha actualizado la foto de perfil.');
     }
+
+    public function faq()
+    {
+        return view('faq');
+    }
 }

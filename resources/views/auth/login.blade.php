@@ -10,14 +10,14 @@
                 @csrf
                 <!-- logotipe -->
                 <div class="row">
-                    <div class="col-sd-12 mx-auto">
-                        <img class="logo" src="{{ asset('img/padelemotion.png') }}" alt="PadelEmotion" />
+                    <div class="col-md-4 mx-auto">
+                        <img class="img-thumbnail" src="{{ asset('img/padelemotion.svg') }}" alt="PadelEmotion" style="background-color:transparent; border:0cm;"/>
                     </div>
                 </div>
         
                 <!-- login form -->
                 <!-- email -->
-                <div class="row mt-5 form-group">
+                <div class="row mt-3 form-group">
                     <div class="col-md-4 offset-md-4">
                         <input class="form-control @error('email') is-invalid @enderror" type="email" 
                                 name="email" placeholder="correo electrónico" value="{{ old('email') }}" required />

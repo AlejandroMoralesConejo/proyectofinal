@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -73,5 +74,21 @@ class RegisterController extends Controller
             'posicion' => $data['posicion'],
             'fec_nacimiento' => $data['fec_nacimiento'],
         ]);
+    }
+
+    public function check(Request $request)
+    {
+        if($request->has('email'))
+        {
+            $email = $request->get('email');
+            if (User::where('email', '=', $email)->count() > 0)
+            {
+                echo 'not_unique';
+            }
+            else
+            {
+                echo 'unique';
+            }
+        }
     }
 }

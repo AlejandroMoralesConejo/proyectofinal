@@ -17,8 +17,9 @@
         <!-- email -->
         <div class="row form-group">
             <div class="col-md-4 mx-auto">
-                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" 
+                <input id="email" class="form-control @error('email') is-invalid @enderror" type="email" name="email" 
                         placeholder="correo electrónico" value="{{ old('email') }}" required />
+                <span id="error_email"></span>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -83,10 +84,10 @@
             </div>
         </div>
 
-        <!-- go to register view -->
+        <!-- register button -->
         <div class="row">
             <div class="col-md-4 mx-auto">
-                <button class="btn btn-primary w-100" type="submit">Registrar</button>
+                <button id="register" class="btn btn-primary w-100" type="submit">Registrar</button>
             </div>
         </div>
     </form>

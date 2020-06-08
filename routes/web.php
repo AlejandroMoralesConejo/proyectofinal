@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// Home and faq
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/faq', 'HomeController@faq')->name('faq');
+    
+// Route::post('/register/check', 'RegisterController@check')->name('check');
 
 // Profile
 Route::middleware('auth')->group(function () {
