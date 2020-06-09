@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $partidos = Partido::all();
+        $partidos = Partido::orderBy('fecha')->orderBy('hora')->paginate(20);
         $pistas = Pista::all();
         return view('admin', ['partidos' => $partidos, 'pistas' => $pistas]);
     }

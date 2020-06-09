@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<script src="{{ asset('js/app.js') }}" defer></script>
 @section('content')
 
     <div class="alert alert-primary my-4" role="alert">
@@ -38,6 +38,7 @@
         @endforeach
         </tbody>
     </table>
+    <div id="paginacion">{{ $partidos->links() }}</div>
     <div class="modal fade" id="linkEditorModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $partidos = Partido::orderBy('fecha')->orderBy('hora')->paginate(4);
+        $partidos = Partido::orderBy('fecha')->orderBy('hora')->paginate(20);
         return view('home')->with('partidos', $partidos);
     }
 

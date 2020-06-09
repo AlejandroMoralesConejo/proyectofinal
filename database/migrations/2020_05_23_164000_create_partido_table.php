@@ -18,6 +18,7 @@ class CreatePartidoTable extends Migration
             $table->unsignedInteger('idPista');
             $table->string('nombre');
             $table->date('fecha');
+            $table->timestamps();
             $table->time('hora');
             $table->integer('limite')->default(0);
         });
