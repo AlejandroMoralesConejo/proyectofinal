@@ -10,14 +10,12 @@
     <title>{{ config('app.name', 'Padelemotion') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/crud.js') }}"></script>
     <script src="{{ asset('js/buscador.js') }}"></script>
+
+    <!-- Check register with AJAX, dissabled because this function is solved with Laravel -->
     <!-- <script src="{{ asset('js/checkRegister.js') }}"></script> -->
-
-
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> -->
 
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/cb07d5ce28.js" crossorigin="anonymous"></script>
@@ -94,9 +92,11 @@
                 </div>
             </div>
         </nav>
+        <!-- yield faq is only for faq view -->
         @yield('faq')
         <div class="container">
             <main class="py-4">
+                <!-- yield for all views less faq -->
                 @yield('content')
 
             </main>
@@ -113,6 +113,7 @@
     </div>
 </body>
 
+<!-- script for chart js -->
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
 

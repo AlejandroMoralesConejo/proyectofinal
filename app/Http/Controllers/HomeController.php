@@ -31,12 +31,20 @@ class HomeController extends Controller
         return view('home')->with('partidos', $partidos);
     }
 
+    /**
+     * Show the profile
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function perfil()
     {
         // $user = auth()->user();
         return view('profile');
     }
 
+    /**
+     * Update a user
+     */
     public function store(Request $request)
     {
         $user = User::find($request->input('idJug'));
@@ -64,12 +72,18 @@ class HomeController extends Controller
         return back()->with('success', 'Usuario actualizado correctamente.');
     }
 
+    /**
+     * delete a user
+     */
     public function delete(Request $request)
     {
         User::destroy($request->input('idJugador'));
         return redirect()->route('home');
     }
 
+    /**
+     * update photo profile
+     */
     public function foto(Request $request)
     {
         $request->validate([
@@ -80,12 +94,17 @@ class HomeController extends Controller
         $nombreArchivo = $request->file('foto')->hashName();
 
         $usuario = User::find($request->input('idJug'));
-        $usuario->foto = 'storage/'.$nombreArchivo;
+        $usuario->foto = 'storage/public/'.$nombreArchivo;
         $usuario->save();
 
         return back()->with('foto', 'Se ha actualizado la foto de perfil.');
     }
 
+    /**
+     * Show the view for design of interfaces
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function faq()
     {
         return view('faq');

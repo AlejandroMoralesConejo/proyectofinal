@@ -40,6 +40,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * relation with matches
+     */
+    
     public function partidos()
     {
         return $this->belongsToMany('App\Partido', 'partido_jugador', 'idJug', 'idPartido');

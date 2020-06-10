@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script src="{{ asset('js/app.js') }}"></script>
 
 @section('content')
     <div class="alert alert-primary my-4" role="alert">

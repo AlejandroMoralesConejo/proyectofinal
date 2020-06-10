@@ -2,6 +2,8 @@
 <script src="{{ asset('js/app.js') }}" defer></script>
 @section('content')
 
+
+    <!-- main table with all the info -->
     <div class="alert alert-primary my-4" role="alert">
         <input class="form-control mx-1 my-2" id="busca" type="text" placeholder="Busca tu partido. Prueba con día, hora, nombre, pista..."/>
     </div>
@@ -38,7 +40,11 @@
         @endforeach
         </tbody>
     </table>
+
+    <!-- pagination -->
     <div id="paginacion">{{ $partidos->links() }}</div>
+
+    <!-- modal to create and update -->
     <div class="modal fade" id="linkEditorModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

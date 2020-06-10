@@ -13,6 +13,11 @@ class PartidoController extends Controller
         // $this->middleware('auth');
     }
 
+    /**
+     * Show a specific match
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function showMatch($idPartido)
     {
         $partido = Partido::find($idPartido);
@@ -28,6 +33,10 @@ class PartidoController extends Controller
         $numJugadores = count($partido->users);
         return view('partido', ['partido' => $partido, 'jugadores' => $jugadores, 'numJugadores' => $numJugadores, 'logueadoPertenece' => $logueadoPertenece]);
     }
+
+    /**
+     * Sign in a match
+     */
 
     public function signInMatch(Request $req)
     {
@@ -47,6 +56,10 @@ class PartidoController extends Controller
     	// redirect to the match view
     	return redirect()->route('partido.mostrar', ['idPartido' => $idPartido]) ;
     }
+
+    /**
+     * Leave a match
+     */
 
     public function leave(Request $request)
     {

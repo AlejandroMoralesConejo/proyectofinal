@@ -1,12 +1,4 @@
-/* body,
-html {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    overflow: hidden;
-} */
+/* banner of faq */
 
 .banner {
     width: 100%;
@@ -14,6 +6,9 @@ html {
     background-size: cover;
     animation: banner 10s infinite;
 }
+
+
+/* animation banner */
 
 @keyframes banner {
     0%,

@@ -18,6 +18,10 @@ class Pista extends Model
         'nombreP', 'direccionP', 
     ];
 
+    /**
+     * relation with matches
+     */
+    
     public function partidos()
     {
         return $this->hasMany('App\Partido', 'idPista', 'idPista');

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <!-- css for this view, slide banner -->
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/Chart.min.js') }}"></script>
 <script src="{{ asset('js/faq.js') }}"></script>
 @section('faq')

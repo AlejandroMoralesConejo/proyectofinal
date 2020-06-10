@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script src="{{ asset('js/app.js') }}"></script>
 
 @section('content')
 
@@ -8,6 +9,7 @@
         </div>
     </div>
 
+    <!-- success message for data update -->
     @if(Session::has('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
@@ -40,7 +42,7 @@
                 </form>
             </div>
             
-            <!-- formulario de registro -->
+            <!-- register form -->
             <div class="col-md-6 py-2 px-2">
             
                 <form action="{{ route('perfil.store') }}" method="POST">
@@ -48,7 +50,7 @@
                     @method('PUT')
 
                     <input type="hidden" name="idJug" value="{{ auth()->user()->idJug }}">
-                    <!-- nombre de usuario -->
+                    <!-- email -->
                     <div class="row form-group">
                         <div class="col-md-10 mx-auto">
                             <label class="col-form-label" for="emailEdit">Correo electrónico:</label>
@@ -59,7 +61,7 @@
                         </div>
                     </div>
 
-                    <!-- nombre -->
+                    <!-- name -->
                     <div class="row form-group">
                         <div class="col-md-10 mx-auto">
                             <label class="col-form-label" for="nombreJ">Nombre:</label>
@@ -70,7 +72,7 @@
                         <span class="text-danger">{{ $errors->first('nombreJ') }}</span>
                     @endif
 
-                    <!-- posicion -->
+                    <!-- position -->
                     <div class="row form-group">
                         <div class="col-md-10 mx-auto">
                             <label class="col-form-label" for="posicion">Posición:</label>
@@ -86,7 +88,7 @@
                         <span class="text-danger">{{ $errors->first('posicion') }}</span>
                     @endif
 
-                    <!-- fecha de nacimiento -->
+                    <!-- birthdate -->
                     <div class="row form-group">
                         <div class="col-md-10 mx-auto">
                             <label class="col-form-label" for="fec_nacimiento">Fecha de Nacimiento:</label>
@@ -94,7 +96,7 @@
                         </div>
                     </div>
 
-                    <!-- registro -->
+                    <!-- register confirm -->
                     <div class="row form-group">
                         <div class="col-md-10 mx-auto">
                             <button class="btn btn-primary w-100" type="submit">Actualizar perfil</button>
@@ -102,13 +104,10 @@
                     </div>
                 </form>
 
-                <!-- borrar jugador -->
+                <!-- delete account -->
                 <div class="row form-group">
                     <div class="col-md-10 mx-auto">
-                        <!-- <form action="" method="get">
-                            <input type="hidden" value="{{ auth()->user()->idJug }}" name="idJugador"> -->
                             <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#exampleModal">BORRAR CUENTA</button>
-                        <!-- </form> -->
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -119,9 +118,7 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <!-- <div class="modal-body">
-                                        ...
-                                    </div> -->
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                         <form action="{{ route('perfil.borrar') }}" method="POST">

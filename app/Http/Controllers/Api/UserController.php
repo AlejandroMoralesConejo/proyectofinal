@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Pista;
+use App\Partido;
 
 class UserController extends Controller
 {
@@ -33,7 +35,12 @@ class UserController extends Controller
         } 
     }
 
-    public function logout(){   
+    /** 
+    * logout api 
+    * 
+    * @return \Illuminate\Http\Response 
+    */ 
+    public function logout(Request $request){   
         if (Auth::check()) {
             Auth::user()->token()->revoke();
             return response()->json(['success' =>'Has cerrado sesión correctamente'],200); 
@@ -47,9 +54,71 @@ class UserController extends Controller
     * 
     * @return \Illuminate\Http\Response 
     */ 
-    public function details() 
+    public function userDetails() 
     { 
         $user = Auth::user(); 
         return response()->json(['success' => $user], $this-> successStatus); 
+    }
+
+    /** 
+    * find a court api 
+    * 
+    * @return \Illuminate\Http\Response 
+    */ 
+    public function findPista(Request $request)
+    {
+        // $idPista = $request->input('idPista');
+        // $pista2 = Pista::find(3);
+        $idPista = $request->validate([
+            'idPista' => 'required|integer'
+            ]);
+        if (Pista::find($idPista))
+        {
+            return response()->json(['success' => Pista::find($idPista)],200);
+        }
+        else
+        {
+            return response()->json(['error' =>'No se ha encontrado la pista'], 404);
+        }
+        
+    }
+
+    /** 
+    * all courts
+    * 
+    * @return \Illuminate\Http\Response 
+    */ 
+    public function pistas()
+    {
+        $pistas = Pista::all();
+        return response()->json(['success' => $pistas], $this-> successStatus); 
+    }
+
+    /** 
+    * find a match 
+    * 
+    * @return \Illuminate\Http\Response 
+    */ 
+    public function findPartido(Request $request)
+    {
+        $idPartido = $request->validate([
+            'idPartido' => 'required',
+        ]);
+        $partido = Partido::find($idPartido);
+        if ($partido)
+            return response()->json(['success' => $partido],200);
+
+        return response()->json(['error' =>'No se ha encontrado el partido'], 404);
+    }
+
+    /** 
+    * all matches
+    * 
+    * @return \Illuminate\Http\Response 
+    */ 
+    public function partidos()
+    {
+        $partidos = Partido::all();
+        return response()->json(['success' => $partidos],200);
     }
 }

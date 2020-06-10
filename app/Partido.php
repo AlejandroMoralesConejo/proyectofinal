@@ -18,10 +18,18 @@ class Partido extends Model
         'nombre', 'fecha', 'hora', 'idPista',
     ];
 
+    /**
+     * Relation with users (model, third table name, primary key, pk user)
+     */
+
     public function users()
     {
         return $this->belongsToMany('App\User', 'partido_jugador', 'idPartido', 'idJug');
     }
+
+    /**
+     * Relation with courts (model and fk)
+     */
 
     public function pista()
     {

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // when we press a key
     $("#buscador").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#fila .card").filter(function() {

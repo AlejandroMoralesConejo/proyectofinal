@@ -39,8 +39,10 @@ Route::middleware('esAdmin')->group(function () {
     Route::delete('/admin/delete/{idPartido}', 'AdminController@delete')->name('admin.delete');
 });
 
+// show match
 Route::get('/partido/{idPartido}', 'PartidoController@showMatch')->name('partido.mostrar')->middleware('auth');
 
+// sign in and leave match
 Route::get('/addJugador', 'PartidoController@signInMatch')->name('partido.add')->middleware('auth');
 Route::get('/leave', 'PartidoController@leave')->name('partido.leave')->middleware('auth');
 
